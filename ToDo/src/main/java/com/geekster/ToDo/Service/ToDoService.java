@@ -12,7 +12,8 @@ public class ToDoService {
     List<ToDo> todolist;
     @Autowired
     ToDoDaoRepository toDoDaoRepository;
-    public List<ToDo> getAllTodos(){
+
+    public List<ToDo> getAllTodos() {
         return toDoDaoRepository.getTodosfromdatasources();
     }
 
@@ -20,9 +21,21 @@ public class ToDoService {
         boolean insertionStatus = toDoDaoRepository.save(todo);
         if (insertionStatus) {
             return "Todo added successfully!!!!";
-        }else{
+        } else {
             return "Failed!!!.....Todo Not Possible";
         }
     }
+
+    public ToDo getTodobasedOnId(String id) {
+        List<ToDo> todoListRightNOw = toDoDaoRepository.getTodosfromdatasources();
+
+        for (ToDo todo : todoListRightNOw) {
+            if (todo.getId().equals(id)) {
+                return todo;
+            }
+        }
+        return null;
+    }
 }
+
 
